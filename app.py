@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-import datetime
+from datetime import datetime
 import json
 import logging
 from logging import FileHandler, Formatter
@@ -441,17 +441,17 @@ def create_artist_submission():
 @app.route('/shows')
 def shows():
   # displays list of shows at /shows
-  rows = shows_query = db.session.query(Show).join(Artist).join(Venue).all()
+  rows = db.session.query(Show).join(Artist).join(Venue).all()
 
   data = []
   for row in rows:
     item = {
-      'venue_id': row.Venue.id,
-      'artist_id': row.Artist.id,
-      'venue_name': row.Venue.name,
-      'artist_name': row.Artist.name,
-      'artist_image_link': row.Artist.image_link,
-      'start_time': row.Show.date.strftime('%Y-%m-%d %H:%I')
+      'venue_id': row.venue_id,
+      'artist_id': row.artist_id,
+      'venue_name': row.venue.name,
+      'artist_name': row.artist.name,
+      'artist_image_link': row.artist.image_link,
+      'start_time': row.start_time.strftime('%Y-%m-%d %H:%I')
     }
     data.append(item)
   

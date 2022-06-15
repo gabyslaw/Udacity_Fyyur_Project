@@ -24,8 +24,6 @@ def is_valid_phone(number):
 
 
 
-   
-
 class ShowForm(Form):
     artist_id = StringField(
         'artist_id'
@@ -53,6 +51,18 @@ class VenueForm(Form):
     
     image_link = StringField(
         'image_link'
+    )
+    state = SelectField(
+        'state', validators=[DataRequired()],
+        choices=State.choices()
+    )
+    genres = SelectMultipleField(
+        'genres', validators=[DataRequired()],
+        choices=Genre.choices()
+    )
+
+    phone = StringField(
+        'phone', validators=[is_valid_phone]
     )
     def validate(self):
         """Define a custom validate method in your Form:"""
@@ -92,6 +102,18 @@ class ArtistForm(Form):
         'city', validators=[DataRequired()]
     )
  
+    state = SelectField(
+        'state', validators=[DataRequired()],
+        choices=State.choices()
+    )
+    genres = SelectMultipleField(
+        'genres', validators=[DataRequired()],
+        choices=Genre.choices()
+    )
+
+    phone = StringField(
+        'phone', validators=[is_valid_phone]
+    )
     def validate(self):
         """Define a custom validate method in your Form:"""
         rv = Form.validate(self)
